@@ -29,8 +29,26 @@ const SignIn = () => {
 
   const signIn = (event: FormEvent) => {
     event.preventDefault();
+
+    // @ts-ignore
+    const elementArray = [...event.target.elements];
     
     // write function code here
+    const data = elementArray.reduce((acc, element) => {
+      if (element.id) {
+        acc[element.id] = element.value
+      }
+
+      return acc;
+    }, {})
+
+    try {
+      if (data.email === "") throw("Please enter an email");
+      if (data.password === "") throw("Please enter a password");
+      if (data.password.length < 8) throw("The password should be at leaset 8 characters long");
+    } catch (error) {
+      alert(error);
+    }
   }
 
   return (<form onSubmit={signIn}>
