@@ -8,7 +8,15 @@ export type FormInput = {
 
 export const GenerateFormElements = (formInputs: FormInput[]) => {
   // write element generation code here
-  return
+  return formInputs.map( formInputs => {
+      return (
+        <div>
+          <label>{formInputs.label}</label>
+          <input id={formInputs.id} type={formInputs.type}/>
+        </div>
+      )
+    }
+  )
 }
 
 const SignIn = () => {
@@ -27,6 +35,8 @@ const SignIn = () => {
 
   return (<form onSubmit={signIn}>
     <h1>Sign in</h1>
+    {GenerateFormElements(formInputs)}
+    <button>Submit</button>
     {/* create components here */}
   </form>)
 }
